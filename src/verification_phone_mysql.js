@@ -1,4 +1,4 @@
-import mysqlpool from "./createMysqlPool.js"
+import mysqlpool from "./db/createMysqlPool.js"
 
 const verification_phone_mysql = (res,req) => {
     let db = mysqlpool.getSqlPool()
