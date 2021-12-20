@@ -26,6 +26,7 @@ const user_register_mysql = (res, req) => {
                             msg: "注册成功",
                             datas: {
                                 phone: phone,
+                                username:phone,
                             }
                         })
                         db.end()
