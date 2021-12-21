@@ -12,7 +12,8 @@ const user_login_mysql = (res, req) => {
             console.log("数据库连接失败！");
         } else {
             connection.query(`select * from user where phone=${phone}`, (err, data) => {
-                if (data) {
+                if (data.length == 1) {
+                    console.log(data);
                     if (password === data[0].password) {
 
                         let redisdb = redisconnection.getredisconnection()
