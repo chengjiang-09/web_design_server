@@ -14,11 +14,13 @@ const init_searchbook_mysql = (res, req) => {
                         msg: "所有书查询成功",
                         datas: data
                     })
+                    db.end()
                 } else {
                     req.send({
                         status: 1,
                         msg: "查询失败！"
                     })
+                    db.end()
                 }
             })
         }

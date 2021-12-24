@@ -8,18 +8,20 @@ const init_activebook_mysql = (req,res) => {
         if(err){
             console.log("数据库连接失败！");
         }else{
-            connection.query("select * from books where bookstatus=2",(err,data) => {
+            connection.query("select * from books where bookstatus=1",(err,data) => {
                 if(data[0]){
                     res.send({
                         status:0,
                         msg:"畅销书查询成功",
                         datas:data
                     })
+                    db.end()
                 }else{
                     res.send({
                         status:1,
                         msg:"查询失败！"
                     })
+                    db.end()
                 }
             })
         }

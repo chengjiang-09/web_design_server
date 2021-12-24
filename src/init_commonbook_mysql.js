@@ -15,11 +15,13 @@ const init_commonbook_mysql = (req, res) => {
                         msg: "普通书查询成功",
                         datas: data
                     })
+                    db.end()
                 } else {
                     res.send({
                         status: 1,
                         msg: "查询失败！"
                     })
+                    db.end()
                 }
             })
         }

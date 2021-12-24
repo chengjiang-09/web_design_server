@@ -23,11 +23,13 @@ const verification_session_mysql = (req, res) => {
                             })
                             let redisDb2 = redisPool.getredisconnection()
                             redisDb2.expire(`${redisRes}_session`, 300)
+                            db.end()
                         }else{
                             res.send({
                                 status:1,
                                 msg:"未登录"
                             })
+                            db.end()
                         }
                     })
                 }

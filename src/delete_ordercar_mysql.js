@@ -1,34 +1,35 @@
 import mysqlpool from "./db/createMysqlPool.js"
 
-const init_newbook_mysql = (req,res) => {
+const delete_ordercar_mysql = (req,res) => {
+
+    let bookid = req.query.bookid
+    let phone = req.query.phone
 
     let db = mysqlpool.getSqlPool()
 
-    db.getConnection((err,connection) => {
+    db.getConnection((err, connection) => {
         if(err){
             console.log("数据库连接失败！");
         }else{
-            connection.query("select * from books where bookstatus=0",(err,data) => {
-                if(data[0]){
+            connection.query(`delete from ordercar where phone=${phone} and bookid=${bookid}`,(err,delmysqlres) => {
+                if(delmysqlres.affectedRows === 1){
                     res.send({
                         status:0,
-                        msg:"新书查询成功",
-                        datas:data
+                        msg:"移除成功!",
                     })
                     db.end()
                 }else{
                     res.send({
                         status:1,
-                        msg:"查询失败！"
+                        msg:"移除失败!"
                     })
                     db.end()
                 }
             })
         }
     })
-
 }
 
 export default {
-    init_newbook_mysql,
+    delete_ordercar_mysql
 }

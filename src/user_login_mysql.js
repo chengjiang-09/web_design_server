@@ -29,17 +29,20 @@ const user_login_mysql = (res, req) => {
                                 username: data[0].username,
                             }
                         })
+                        db.end()
                     }else{
                         req.send({
                             status:1,
                             msg:"账号或密码错误！"
                         })
+                        db.end()
                     }
                 }else{
                     req.send({
                         status:1,
                         msg:"账号或密码错误！"
                     })
+                    db.end()
                 }
             })
         }

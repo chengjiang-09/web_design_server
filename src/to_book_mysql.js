@@ -1,6 +1,13 @@
 import mysqlpool from "./db/createMysqlPool.js"
 
 const to_book_mysql = (req,res) => {
+    if(!req.query.bookid){
+        return res.send({
+            status:1,
+            msg:"404",
+        })
+    }
+
     let id = req.query.bookid
 
     let db = mysqlpool.getSqlPool()
@@ -15,6 +22,13 @@ const to_book_mysql = (req,res) => {
                         status:0,
                         msg:"查询成功！",
                         datas:data
+                    })
+                    db.end()
+                }else{
+                    db.end()
+                    return res.send({
+                        status:1,
+                        msg:"404",
                     })
                 }
             })
