@@ -9,7 +9,7 @@ const payment_mysql = (req,res) => {
         if(err){
             console.log("数据库连接失败！");
         }else{
-            let sql = `insert into ordertable(orderid,ordertime,orderuser,totalprice,touser,toplace,orderstatus,totalnum,orderphone) values(${oneorderlist.orderid},"${oneorderlist.ordertime}",${oneorderlist.orderuser},${oneorderlist.totalprice},${oneorderlist.touser},${oneorderlist.toplace},${oneorderlist.orderstatus},${oneorderlist.totalnum},${oneorderlist.orderphone})`
+            let sql = `insert into ordertable(orderid,ordertime,orderuser,totalprice,touser,toplace,orderstatus,totalnum,orderphone) values(${oneorderlist.orderid},"${oneorderlist.ordertime}",${oneorderlist.orderuser},${oneorderlist.totalprice},"${oneorderlist.touser}","${oneorderlist.toplace}",${oneorderlist.orderstatus},${oneorderlist.totalnum},${oneorderlist.orderphone})`
 
             connection.query(sql,(err,mysqlres) => {
                 if(mysqlres.affectedRows === 1){

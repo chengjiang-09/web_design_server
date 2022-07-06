@@ -15,7 +15,14 @@ const user_register_mysql = (res, req) => {
                 console.log("数据库连接失败！");
             } else {
                 connection.query(`insert into user(phone,password,username) values(${phone},${password1},${phone})`, (err, data) => {
-                    if (data.affectedRows === 1) {
+                    if (err) {
+                    
+                        req.send({
+                            status: 1,
+                            msg: "注册失败"
+                        })
+                        db.end()
+                    } else {
                         let redisdb = redisconnection.getredisconnection()
 
                         redisdb.set(`${phone}_session`, `${phone}`)
@@ -28,12 +35,6 @@ const user_register_mysql = (res, req) => {
                                 phone: phone,
                                 username:phone,
                             }
-                        })
-                        db.end()
-                    } else {
-                        req.send({
-                            status: 1,
-                            msg: "注册失败"
                         })
                         db.end()
                     }

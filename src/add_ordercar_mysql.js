@@ -13,7 +13,7 @@ const add_ordercar_mysql = (req,res) => {
         if(err){
             console.log("数据库连接失败！");
         }else{
-            connection.query(`select * from ordercar where bookid=${bookid}`,(err,bookin) => {
+            connection.query(`select * from ordercar where bookid=${bookid} and phone=${phone}`,(err,bookin) => {
                 if(bookin[0]){
                     res.send({
                         status:0,
